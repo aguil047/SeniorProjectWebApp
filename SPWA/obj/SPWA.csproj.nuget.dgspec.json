@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\loony\\source\\repos\\Senior Web App\\SPWA\\SPWA.csproj": {}
+    "C:\\Dev\\School\\SeniorProjectWebApp\\SPWA\\SPWA.csproj": {}
   },
   "projects": {
-    "C:\\Users\\loony\\source\\repos\\Senior Web App\\SPWA\\SPWA.csproj": {
+    "C:\\Dev\\School\\SeniorProjectWebApp\\SPWA\\SPWA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\loony\\source\\repos\\Senior Web App\\SPWA\\SPWA.csproj",
+        "projectUniqueName": "C:\\Dev\\School\\SeniorProjectWebApp\\SPWA\\SPWA.csproj",
         "projectName": "SPWA",
-        "projectPath": "C:\\Users\\loony\\source\\repos\\Senior Web App\\SPWA\\SPWA.csproj",
-        "packagesPath": "C:\\Users\\loony\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\loony\\source\\repos\\Senior Web App\\SPWA\\obj\\",
+        "projectPath": "C:\\Dev\\School\\SeniorProjectWebApp\\SPWA\\SPWA.csproj",
+        "packagesPath": "C:\\Users\\jayt7\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\School\\SeniorProjectWebApp\\SPWA\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\loony\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jayt7\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
