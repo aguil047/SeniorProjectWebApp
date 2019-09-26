@@ -1,3 +1,4 @@
+using SPWA.DataAccess;
 using System;
 
 namespace SPWA.Data
@@ -11,5 +12,7 @@ namespace SPWA.Data
         public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 
         public string Summary { get; set; }
+
+        StudentModel student = new StudentModel();
     }
 }
