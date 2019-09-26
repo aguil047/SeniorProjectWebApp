@@ -15,6 +15,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SPWA.Areas.Identity;
 using SPWA.Data;
+using Microsoft.AspNetCore.Components.Builder;
+using EmbeddedBlazorContent;
+using System.Net.Http;
 
 namespace SPWA
 {
@@ -39,6 +42,7 @@ namespace SPWA
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddScoped<HttpClient>();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddSingleton<WeatherForecastService>();
         }
@@ -62,6 +66,7 @@ namespace SPWA
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseEmbeddedBlazorContent(typeof(MatBlazor.BaseMatComponent).Assembly);
 
             app.UseAuthentication();
             app.UseAuthorization();
