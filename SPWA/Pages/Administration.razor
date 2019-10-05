@@ -4,34 +4,54 @@
 @inject UserManager<IdentityUser> _UserManager
 @inject RoleManager<IdentityRole> _RoleManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
-<h3>Administration</h3>
-        
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>User Name</th>
-            <th>Email</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in ColUsers)
-        {
+
+<MatCard Class="mat-elevation-z1">
+    <MatDialogTitle Style="font-family:'Nunito';font-size:x-large" Class="font-weight-bold">Users Table</MatDialogTitle>
+</MatCard>
+<MatDivider></MatDivider>
+@*<table class="table">
+        <thead>
             <tr>
-                <td>@user.Id.Substring(0, 5) ...</td>
-                <td>@user.UserName</td>
-                <td>@user.Email</td>
-                <td>
-                    <!-- Edit the current forecast -->
-                    <button class="btn btn-primary"
-                            @onclick="(() => EditUser(user))">
-                        Edit
-                    </button>
-                </td>
+                <th>Id</th>
+                <th>User Name</th>
+                <th>Email</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var user in ColUsers)
+            {
+                <tr>
+                    <td>@user.Id.Substring(0, 5) ...</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>
+                         Edit the current forecast
+    <button class="btn btn-primary"
+            @onclick="(() => EditUser(user))">
+        Edit
+    </button>
+                    </td>
+                </tr>
+    }
+        </tbody>
+    </table>*@
+
+<div class="mat-elevation-z1" style="font-family:'Nunito'">
+    <MatBlazor.MatTable Items="@ColUsers" Class="table-hover" Style="flex-wrap:wrap">
+        <MatTableHeader>
+            <th style="font-weight:bold">ID</th>
+            <th style="font-weight:bold">UserName</th>
+            <th style="font-weight:bold">Email</th>
+            <th style="font-weight:bold">Actions</th>
+        </MatTableHeader>
+        <MatTableRow>
+            <td width="32%">@context.Id</td>
+            <td width="32%">@context.UserName</td>
+            <td width="32%">@context.Email</td>
+            <td><MatIconButton Icon="edit" OnClick="@( (_) =>EditUser(@context))" Style="color:dodgerblue"></MatIconButton></td>
+        </MatTableRow>
+    </MatBlazor.MatTable>
+</div>
 
 @if (ShowPopup)
 {
@@ -62,15 +82,15 @@
                     else
                     {
                         <input class="form-control" type="text"
-                                placeholder="UserName"
-                                @bind="objUser.UserName" />
+                               placeholder="UserName"
+                               @bind="objUser.UserName" />
                     }
                     <input class="form-control" type="text"
-                            placeholder="Email"
-                            @bind="objUser.Email" />
+                           placeholder="Email"
+                           @bind="objUser.Email" />
                     <input class="form-control" type="password"
-                            placeholder="Password"
-                            @bind="objUser.PasswordHash" />
+                           placeholder="Password"
+                           @bind="objUser.PasswordHash" />
                     <select class="form-control"
                             @bind="@CurrentUserRole">
                         @foreach (var option in Options)
@@ -111,7 +131,7 @@
     string ADMINISTRATION_ROLE = "Administrators";
     System.Security.Claims.ClaimsPrincipal CurrentUser;
 
-     // Property used to add or edit the currently selected user
+    // Property used to add or edit the currently selected user
     IdentityUser objUser = new IdentityUser();
     // Tracks the selected role for the currently selected user
     string CurrentUserRole { get; set; } = "Users";
@@ -199,18 +219,18 @@
                 // is not the default value
                 if (objUser.PasswordHash != "*****")
                 {
-                    var resetToken = 
+                    var resetToken =
                         await _UserManager.GeneratePasswordResetTokenAsync(user);
-                    var passworduser = 
+                    var passworduser =
                         await _UserManager.ResetPasswordAsync(
-                            user, 
-                            resetToken, 
+                            user,
+                            resetToken,
                             objUser.PasswordHash);
                     if (!passworduser.Succeeded)
                     {
                         if (passworduser.Errors.FirstOrDefault() != null)
                         {
-                            strError = 
+                            strError =
                                 passworduser
                                 .Errors
                                 .FirstOrDefault()
@@ -226,14 +246,14 @@
                 }
                 // Handle Roles
                 // Is user in administrator role?
-                var UserResult = 
+                var UserResult =
                     await _UserManager
                     .IsInRoleAsync(user, ADMINISTRATION_ROLE);
-                // Is Administrator role selected 
+                // Is Administrator role selected
                 // but user is not an Administrator?
                 if (
-                    (CurrentUserRole == ADMINISTRATION_ROLE) 
-                    & 
+                    (CurrentUserRole == ADMINISTRATION_ROLE)
+                    &
                     (!UserResult))
                 {
                     // Put admin in Administrator role
@@ -242,10 +262,10 @@
                 }
                 else
                 {
-                    // Is Administrator role not selected 
+                    // Is Administrator role not selected
                     // but user is an Administrator?
-                    if ((CurrentUserRole != ADMINISTRATION_ROLE) 
-                        & 
+                    if ((CurrentUserRole != ADMINISTRATION_ROLE)
+                        &
                         (UserResult))
                     {
                         // Remove user from Administrator role
@@ -306,7 +326,7 @@
             strError = ex.GetBaseException().Message;
         }
     }
-    
+
     async Task EditUser(IdentityUser _IdentityUser)
     {
         // Set the selected user

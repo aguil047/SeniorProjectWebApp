@@ -32,6 +32,7 @@ namespace SPWA
             services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+                
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<HttpClient>();

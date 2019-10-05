@@ -3,24 +3,12 @@
 @inject UserManager<IdentityUser> _UserManager
 @inject RoleManager<IdentityRole> _RoleManager
 
-<MatCard>
-    <MatDialogTitle>Students</MatDialogTitle>
+<MatCard Class="mat-elevation-z1">
+    <MatDialogTitle Style="font-family:'Nunito'" Class="font-weight-bold">Students</MatDialogTitle>
 </MatCard>
-
-<MatBlazor.MatTable Items="@ColUsers" Class="mat-elevation-z5">
-    <MatTableHeader>
-        <th>ID</th>
-        <th>UserName</th>
-        <th>Email</th>
-    </MatTableHeader>
-    <MatTableRow>
-        <td>@context.Id</td>
-        <td>@context.UserName</td>
-        <td>@context.Email</td>
-    </MatTableRow>
-</MatBlazor.MatTable>
-
-@*<MatTable Items="@ColUsers" Class="mat-elevation-z5">
+<p></p>
+<div class="mat-elevation-z1">
+    <MatBlazor.MatTable Items="@ColUsers" Class="mat-elevation-z5">
         <MatTableHeader>
             <th>ID</th>
             <th>UserName</th>
@@ -31,35 +19,48 @@
             <td>@context.UserName</td>
             <td>@context.Email</td>
         </MatTableRow>
-    </MatTable>*@
+    </MatBlazor.MatTable>
+</div>
+    @*<MatTable Items="@ColUsers" Class="mat-elevation-z5">
+            <MatTableHeader>
+                <th>ID</th>
+                <th>UserName</th>
+                <th>Email</th>
+            </MatTableHeader>
+            <MatTableRow>
+                <td>@context.Id</td>
+                <td>@context.UserName</td>
+                <td>@context.Email</td>
+            </MatTableRow>
+        </MatTable>*@
 
-@code {
-    List<IdentityUser> ColUsers = new List<IdentityUser>();
-    string strError = "";
+    @code {
+        List<IdentityUser> ColUsers = new List<IdentityUser>();
+        string strError = "";
 
-    protected override async Task OnInitializedAsync()
-    {
-        GetUsers();
-    }
-
-    public void GetUsers()
-    {
-        // clear any error messages
-        strError = "";
-        // Collection to hold users
-        ColUsers = new List<IdentityUser>();
-        // get users from _UserManager
-        var user = _UserManager.Users.Select(x => new IdentityUser
+        protected override async Task OnInitializedAsync()
         {
-            Id = x.Id,
-            UserName = x.UserName,
-            Email = x.Email,
-            PasswordHash = "*****"
-        });
-        foreach (var item in user)
-        {
-            ColUsers.Add(item);
+            GetUsers();
         }
-    }
 
-}
+        public void GetUsers()
+        {
+            // clear any error messages
+            strError = "";
+            // Collection to hold users
+            ColUsers = new List<IdentityUser>();
+            // get users from _UserManager
+            var user = _UserManager.Users.Select(x => new IdentityUser
+            {
+                Id = x.Id,
+                UserName = x.UserName,
+                Email = x.Email,
+                PasswordHash = "*****"
+            });
+            foreach (var item in user)
+            {
+                ColUsers.Add(item);
+            }
+        }
+
+    }
